@@ -1,0 +1,165 @@
+<!--<button mat-raised-button class="btn1" (click)="onClick1()">Vista scuole</button>
+<button mat-raised-button class="btn2" (click)="onClick2()">Vista attività</button>
+<button mat-raised-button class="btn3" (click)="onClick3()">Vista..</button>
+<div class="statistiche">
+  <div *ngIf="click1">
+    <p *ngFor="let scuola of scuole">
+      {{scuola.nome}}
+    </p>
+  </div>
+  <div *ngIf="click2" >
+    <p *ngFor="let universo of universi">
+      {{universo.matricola}}
+    </p>
+  </div>
+  <div *ngIf="click3" >vista...</div>
+</div>-->
+<div class="container">
+  <div class="wrapper">
+    <div class="bottoni">
+      <button mat-raised-button class="btn1" id="btn1" (click)="onClick1()">
+        Vista scuole
+      </button>
+      <button mat-raised-button class="btn2" id="btn2" (click)="onClick2()">
+        Vista attività
+      </button>
+      <button mat-raised-button class="btn3" id="btn3" (click)="onClick3()">
+        Vista referenti
+      </button>
+      <mat-form-field *ngIf="click < 3">
+        <mat-label>Seleziona anno Accademico</mat-label>
+        <mat-select (selectionChange)="cambioRisultati($event.value)">
+          <mat-option *ngFor="let an of anni" [value]="an.value">
+            {{ an.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="click == 0 || click == 1">
+        <mat-label>Selziona ordinamento vista</mat-label>
+        <mat-select (selectionChange)="cambioOrdinamento($event.value)">
+          <mat-option value="ISCRITTI">Per numero di iscritti</mat-option>
+          <mat-option value="REGIONI">Alfabetico per regione</mat-option>
+          <mat-option value="SCUOLE">Alfabetico per le scuole</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="click == 2">
+        <mat-label>Selziona ordinamento vista</mat-label>
+        <mat-select (selectionChange)="cambioOrdinamentoAtt($event.value)">
+          <mat-option value="ISCRITTI">Per numero di iscritti</mat-option>
+          <mat-option value="NOME">Alfabetico per attività</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="click == 3">
+        <mat-label>Selziona ordinamento vista</mat-label>
+        <mat-select (selectionChange)="cambioOrdinamentoProf($event.value)">
+          <mat-option value="COGNOME">Alfabetico per Cognome</mat-option>
+          <mat-option value="NOME">Alfabetico per Nome</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="generato">
+    <div *ngIf="click == 1" class="pannelli">
+      <div *ngFor="let ris of visualRis">
+        <div>
+          <mat-accordion class="header-align">
+            <mat-expansion-panel
+              hideToggle
+              class="panel"
+              [ngStyle]="{
+                background: ris.iscritti.length > 0 ? 'ligthgreen' : 'coral'
+              }"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ ris.scuola.nome }}
+                  {{ ris.scuola.regione }}
+                  {{ ris.scuola.provincia }}
+                  {{ ris.scuola.citta }}
+                  {{ annoVisual }}
+                </mat-panel-title>
+                <mat-panel-description class="right-aligned">
+                  Totale iscritti {{ ris.iscritti.length }}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div>
+                <ng-container *ngFor="let a of ris.attivita">
+                  {{ a.nomeAttivita }} Partecipanti {{ a.partecipanti.length }},
+                  Iscritti {{ a.iscritti.length }}
+                  <br />
+                  <ng-container *ngFor="let i of a.iscritti">
+                    {{ i.nome }} {{ i.cognome }}
+                  </ng-container>
+                  <br/>
+                </ng-container>
+              </div>
+              <div *ngIf="ris.iscritti.length > 0">
+                Elenco Iscritti:<br>
+                <ng-container *ngFor="let i of ris.iscritti">
+                  {{ i.nome }} {{ i.cognome }}
+                  <br/>
+                </ng-container>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="click == 2">
+      <div *ngFor="let ris of visualRisAtt">
+        <div>
+          <mat-expansion-panel
+            [ngStyle]="{
+              background: ris.universitarii.length > 0 ? 'ligthgreen' : 'coral'
+            }"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ ris.attivita }} Anno {{ annoVisual }}
+              </mat-panel-title>
+              <mat-panel-description class="right-aligned">
+                Totale iscritti : {{ ris.universitarii.length }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p *ngIf="ris.universitarii.length > 0">
+              <ng-container *ngFor="let i of ris.universitarii">
+                {{ i.nome }} {{ i.cognome }}
+                <br />
+              </ng-container>
+            </p>
+          </mat-expansion-panel>
+          <!-- <mat-card [ngStyle]="{'background': ris.universitarii.length >0 ? 'ligthgreen' : 'coral'}">
+              <mat-card-header>
+                <mat-card-title>{{ris.attivita}} Anno: {{annoVisual}}</mat-card-title>
+                  <mat-card-subtitle>Totale iscritti all'universita {{ ris.universitarii.length }}</mat-card-subtitle>
+              </mat-card-header>
+             <ng-container>
+              <mat-card-content>
+                <p *ngFor="let s of ris.universitarii">{{s.nome}}</p>
+                <mat-divider></mat-divider>
+              </mat-card-content>
+             </ng-container>
+            </mat-card> -->
+        </div>
+      </div>
+    </div>
+    <div *ngIf="click == 3">
+      <div *ngFor="let p of profVisual">
+        <mat-card>
+          <mat-card-header>
+           <h1>{{ p.professore.nome }} {{ p.professore.cognome }}</h1>
+          </mat-card-header>
+          <mat-card-content>
+            email: {{ p.professore.email }}
+            <br />
+            scuola: {{ p.scuola.nome }}
+            <br />
+            città : {{ p.scuola.citta }}
+            <br />
+            regione : {{ p.scuola.regione }}
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

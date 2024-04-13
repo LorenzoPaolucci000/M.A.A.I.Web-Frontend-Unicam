@@ -1,0 +1,72 @@
+/* .btn1{
+  background-color: blue;
+  position: relative;
+  left: 10px;
+  top: 20px;
+}
+.btn2{
+  background-color: yellow;
+  position: relative;
+  left: 20px;
+  top: 20px;
+}
+.btn3{
+  background-color: green;
+  position: relative;
+  left: 40px;
+  top: 20px;
+} */
+/*questo è per la barra in alto cioè vista scuole,vista attività etc e divise per anno
+*/
+
+
+.container{
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+
+
+.wrapper {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.bottoni {
+  width: 100%;
+  max-width: 100%;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  padding-bottom: 32px;
+}
+
+.bottoni>button{
+  width: 110px;
+}
+
+.generato > div {
+  display: grid;
+}
+
+.btn1:hover{
+  background-color: blue;
+}
+.btn2:hover{
+  background-color: red;
+}
+.btn3:hover{
+  background-color: green;
+}
+.btn4:hover{
+  background-color: yellow;
+}
+
+mat-panel-description.right-aligned {
+  flex-grow: 0;
+  gap: 10px;
+}

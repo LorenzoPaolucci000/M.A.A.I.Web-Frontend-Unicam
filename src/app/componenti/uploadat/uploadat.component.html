@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="wrapper">
+    <div>
+      <h1>Upload Fogli Excel</h1>
+    </div>
+    <div class="select-container">
+      <mat-form-field>
+        <mat-label>Seleziona tipo Upload</mat-label>
+        <mat-select (selectionChange)="cambioSel($event.value)">
+          <mat-option value="ATT">Upload Attività</mat-option>
+          <mat-option value="ISCR">Upload Iscritti</mat-option>
+          <mat-option value="PROF">Upload Professori</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="upload">
+      
+      <div class="attivita" *ngIf="visualizza == 'ATT'">
+        
+        <input
+          type="text"
+          id="text"
+          (change)="cambio($event)"
+          placeholder="Nome attività"
+        />
+        
+        <div>
+          <label for="annoInizio">Anno accademico di inizio:</label>
+          <input type="number" id="annoInizio" name="annoInizio" [(ngModel)]="annoAccademicoInizio" required minlength="4" maxlength="4">
+        </div>
+        <div>
+          <label for="annoFine">Anno accademico di fine:</label>
+          <input type="number" id="annoFine" name="annoFine" [(ngModel)]="annoAccademicoFine" required minlength="4" maxlength="4">
+        </div>
+        <input type="file" accept=".xlsx" (change)="onChangeFile($event)" />
+     
+        <button (click)="submitAttForm()">Carica!</button>
+      </div>
+      <div class="iscritt" *ngIf="visualizza == 'ISCR'">
+        <div>
+          <label for="annoInizio">Anno accademico di inizio:</label>
+          <input type="number" id="annoInizio" name="annoInizio" [(ngModel)]="annoAccademicoInizio" required minlength="4" maxlength="4">
+        </div>
+        <div>
+          <label for="annoFine">Anno accademico di fine:</label>
+          <input type="number" id="annoFine" name="annoFine" [(ngModel)]="annoAccademicoFine" required minlength="4" maxlength="4">
+        </div>
+        <input type="file" accept=".xlsx" (change)="onChangeFileIscr($event)" />
+        
+        <button (click)="submitIscrForm()">Carica!</button>
+      </div>
+
+      <div class="prof" *ngIf="visualizza == 'PROF'">
+      
+        <input type="file" accept=".xlsx" (change)="onChangeFileProf($event)" />
+        
+        <button (click)="onclickProf()">Carica!</button>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="image-container">
+    <div class="img-att" *ngIf="visualizza == 'ATT'">
+      <h3>Esempio formattazione file attività</h3>
+      <img src="assets/immagini/esempio_att.png" />
+    </div>
+    <div class="img-iscr" *ngIf="visualizza == 'ISCR'">
+      <h2>N.B:Nel file usato per l'inserimento gli iscritti devono essere tutti dello stessto corso!!!</h2>
+      <h3>Esempio formattazione file iscritti</h3>
+      <img src="assets/immagini/esempio_iscr.png" />
+    </div>
+    <div class="img-prof" *ngIf="visualizza == 'PROF'">
+      <h3>Esempio formattazione file attività</h3>
+      <img src="assets/immagini/esempio_prof.png" />
+    </div>
+
+  </div>
+</div>
