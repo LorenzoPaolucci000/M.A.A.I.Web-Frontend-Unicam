@@ -167,13 +167,21 @@ export class StatsComponent implements OnInit {
 
   createAnni(i: number, f: number) {
     let x = i;
-    while (x <= f) {
+    /*while (x <= f) {
       let anno = (x / 2 - 1).toFixed().substring(2, 4);
       let annofin = (x / 2).toFixed().substring(2, 4);
       let ann: Anni = { value: x, viewValue: anno + '/' + annofin };
       this.anni.push(ann);
       x = x + 2;
-    }
+    }*/
+    let ann: Anni = { value: 4043, viewValue: 21 + '/' + 22 };
+    this.anni.push(ann);
+    let ann1: Anni = { value: 4045, viewValue: 22 + '/' + 23 };
+    this.anni.push(ann1);
+    let ann2: Anni = { value: 4047, viewValue: 23 + '/' + 24 };
+    this.anni.push(ann2);
+    let ann3: Anni = { value: 4049, viewValue: 24 + '/' + 25 };
+    this.anni.push(ann3);
   }
 
   onClick1() {

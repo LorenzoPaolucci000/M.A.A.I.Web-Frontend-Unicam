@@ -46,7 +46,7 @@ export class UploadatComponent implements OnInit {
   
       .post('http://localhost:8080/universitari/uploadConAnno1/'+ ""+anno, this.dataIscr)
       .subscribe({
-        next: (response) => console.log('ok', response),
+        next: (response) => console.log(alert("inserimento avvenuto con successo"), response),
         error: (error) => console.log(error),
       });
   }
@@ -57,7 +57,7 @@ export class UploadatComponent implements OnInit {
     this.http
       .post('http://localhost:8080/attivita/uploadConAnno1/' + anno+this.nome, this.data)
       .subscribe({
-        next: (response) => console.log('ok', response),
+        next: (response) => console.log( alert("inserimento avvenuto con successo"), response),
         error: (error) => console.log(error),
       });
   }
@@ -67,7 +67,7 @@ export class UploadatComponent implements OnInit {
     this.http
       .post('http://localhost:8080/professori/uploadConFile1',  this.dataProf)
       .subscribe({
-        next: (response) => console.log('ok', response),
+        next: (response) => console.log(alert("inserimento avvenuto con successo"), response),
         error: (error) => console.log(error),
       });
   }
