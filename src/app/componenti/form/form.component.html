@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Forms</title>
+</head>
+<body>
+  
+  <div>
+    <button (click)="toggleDropdown()">Mostra Attività</button>
+    <div *ngIf="showDropdown">
+      <h2>Attività Presenti</h2>
+        <select (change)="selectItem($event)">
+        <option *ngFor="let item of items">{{item}}</option>
+      </select>
+    </div>
+  </div>
+
+
+    <div>
+        <h2>Iscriviti</h2>
+        <form>
+        
+          
+
+          <div>
+            <input
+            type="text"
+            id="text"
+            (change)="cambioNome($event)"
+            placeholder="Nome"
+          />
+          </div>
+          <div>
+            <input
+            type="text"
+            id="text"
+            (change)="cambioCognome($event)"
+            placeholder="Cognome"
+          />
+          </div>
+          <button (click)="InviaIscrizione()">Invia!</button>
+        </form>
+      </div>
+      
+ 
+
+
+
+   
+
+</body>
+</html>

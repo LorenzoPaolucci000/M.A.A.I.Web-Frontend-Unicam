@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Forms</title>
+</head>
+<body>
+
+
+
+<h2>Creazione attività vuota</h2>
+<form>
+
+  <input
+          type="text"
+          id="text"
+          (change)="cambioNome($event)"
+          placeholder="Nome attività"
+        />
+
+
+  <div>
+    <label for="annoInizio">Anno accademico di inizio:</label>
+    <input type="number" id="annoInizio" name="annoInizio" [(ngModel)]="annoAccademicoInizio" required minlength="4" maxlength="4">
+  </div>
+  <div>
+    <label for="annoFine">Anno accademico di fine:</label>
+    <input type="number" id="annoFine" name="annoFine" [(ngModel)]="annoAccademicoFine" required minlength="4" maxlength="4">
+  </div>
+
+  <div>
+    <input
+    type="text"
+    id="text"
+    (change)="cambioScuola($event)"
+    placeholder="Scuola"
+  />
+  </div>
+  <div>
+    <input
+          type="text"
+          id="text"
+          (change)="cambioCitta($event)"
+          placeholder="Citta"
+        />
+  </div>
+
+
+  <button (click)="inviaForm()">Carica!</button>
+  
+</form>
+
+
+
+
+<div class="container">
+  <h2>Carica Definitivamente</h2>
+  <button (click)="toggleDropdown()" class="btn">Mostra Attività</button>
+  <div *ngIf="showDropdown" class="dropdown">
+    <h2>Attività Presenti</h2>
+    <select (change)="selectItem($event)">
+          
+       
+      <option *ngFor="let item of items">{{item}}</option>
+    </select>
+  </div>
+
+  <div>
+    <button (click)="handleButtonClick()" class="btn">Carica Definitivamente</button>
+  </div>
+
+</div>
+
+
+
+</body>
+</html>
