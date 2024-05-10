@@ -10,8 +10,8 @@
     <button (click)="toggleDropdown()">Mostra Attività</button>
     <div *ngIf="showDropdown">
       <h2>Attività Presenti</h2>
-        <select (change)="selectItem($event)">
-        <option *ngFor="let item of items">{{item}}</option>
+      <select [(ngModel)]="selectedItem" (change)="onSelectionChange($event)">
+        <option *ngFor="let item of items" [value]="item">{{item}}</option>
       </select>
     </div>
   </div>

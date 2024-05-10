@@ -26,6 +26,8 @@ export class AdminComponent implements OnInit {
   private citta: string='';
   items: string[]=[];
   private visualizza:string='';
+
+  selectedItem: string='';
   //http: any;
 
  /* constructor(private route: ActivatedRoute) {
@@ -90,7 +92,7 @@ export class AdminComponent implements OnInit {
     */
    console.log();
     const nome:string=this.nome;
-    const anno:number=this.anno=this.annoAccademicoInizio+this.annoAccademicoFine;;
+    const anno:number=this.anno=this.annoAccademicoInizio+this.annoAccademicoFine;
     const nomeScuola:string=this.scuola;
     const cittaScuola:string=this.citta;
     
@@ -162,6 +164,12 @@ export class AdminComponent implements OnInit {
   selectItem(event: any) {
     this.visualizza=event.target.value;
       }
+
+
+      onSelectionChange(event:any) {
+        this.visualizza=event.target.value;
+       
+         }
 }
 
 

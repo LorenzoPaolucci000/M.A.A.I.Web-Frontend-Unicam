@@ -1,19 +1,4 @@
-<!--<button mat-raised-button class="btn1" (click)="onClick1()">Vista scuole</button>
-<button mat-raised-button class="btn2" (click)="onClick2()">Vista attività</button>
-<button mat-raised-button class="btn3" (click)="onClick3()">Vista..</button>
-<div class="statistiche">
-  <div *ngIf="click1">
-    <p *ngFor="let scuola of scuole">
-      {{scuola.nome}}
-    </p>
-  </div>
-  <div *ngIf="click2" >
-    <p *ngFor="let universo of universi">
-      {{universo.matricola}}
-    </p>
-  </div>
-  <div *ngIf="click3" >vista...</div>
-</div>-->
+
 <div class="container">
   <div class="wrapper">
     <div class="bottoni">
@@ -31,6 +16,7 @@
         <mat-select (selectionChange)="cambioRisultati($event.value)">
           <mat-option *ngFor="let an of anni" [value]="an.value">
             {{ an.viewValue }}
+
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -59,7 +45,9 @@
     </div>
   </div>
   <div class="generato">
+    
     <div *ngIf="click == 1" class="pannelli">
+               
       <div *ngFor="let ris of visualRis">
         <div>
           <mat-accordion class="header-align">
@@ -102,6 +90,8 @@
               </div>
             </mat-expansion-panel>
           </mat-accordion>
+           <!-- Bottone per scaricare la vista scuole-->
+       <button mat-raised-button class="btn-scaricaScuole" id="scaricaScuoleButton"(click)="scaricaVistaScuole()">Scarica Vista Scuole</button>
         </div>
       </div>
     </div>
@@ -128,6 +118,8 @@
               </ng-container>
             </p>
           </mat-expansion-panel>
+           <!-- Bottone per scaricare la vista professori -->
+       <button mat-raised-button class="btn-scaricaRisultati" id="scaricaRisButton"(click)="scaricaVistarisulati()">Scarica Vista Risultati</button>
           <!-- <mat-card [ngStyle]="{'background': ris.universitarii.length >0 ? 'ligthgreen' : 'coral'}">
               <mat-card-header>
                 <mat-card-title>{{ris.attivita}} Anno: {{annoVisual}}</mat-card-title>
@@ -159,9 +151,20 @@
             regione : {{ p.scuola.regione }}
             <br />
             attività : {{ p.professore.attivita }}
+
           </mat-card-content>
+
         </mat-card>
+       <!-- Bottone per scaricare la vista professori -->
+       <button mat-raised-button class="btn-scarica" id="scaricaProfButton"(click)="scaricaVistaProfessori()">Scarica Vista Professori</button>
+      
       </div>
+
+
+ 
     </div>
   </div>
+
+
+
 </div>

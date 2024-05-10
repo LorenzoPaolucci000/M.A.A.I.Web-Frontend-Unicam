@@ -11,6 +11,9 @@ import { Anni } from 'src/app/interface/anni';
 import { ProfessoriService } from 'src/app/service/professori.service';
 import { Professori } from 'src/app/interface/professori';
 import { Profvisual } from 'src/app/interface/profvisual';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable, toArray } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-stats',
@@ -18,7 +21,8 @@ import { Profvisual } from 'src/app/interface/profvisual';
   styleUrls: ['./stats.component.css'],
 })
 export class StatsComponent implements OnInit {
-  constructor(
+  
+  constructor(private http: HttpClient,
     private scuolaService: ScuoleService,
     private universiService: UniversiService,
     private resService: ResService,
@@ -254,8 +258,112 @@ export class StatsComponent implements OnInit {
     }
   }
  
+ // Metodo per avviare il download del file
+ scaricaVistaProfessori():void  {
+  this.downloadProfFile().subscribe(
+    (blob: Blob) => {
+      // Creare un oggetto URL per il blob scaricato
+      const url = window.URL.createObjectURL(blob);
+
+      // Creare un link temporaneo e avviare il download
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'professori.xlsx'; 
+      document.body.appendChild(link);
+      link.click();
+
+      // Pulire l'URL creato per il blob
+      window.URL.revokeObjectURL(url);
+    },
+    (error) => {
+      console.error('Errore durante il download del file:', error);
+    }
+  );
+}
+downloadProfFile(): Observable<Blob> {
+  const url = 'http://localhost:8080/professori/download';
+  let body = {name:"professori.xlsx" };
+  console.log(body.name);
+  // Effettua una richiesta HTTP GET per scaricare il file
+ // Effettua una richiesta HTTP POST per scaricare il file
+ return this.http.post<Blob>(url, body, {
+  responseType: 'blob' as 'json', // Indica al server che ci aspettiamo un blob come risposta
+});
+
+
+ 
+
+
+}
+
+
+// Metodo per avviare il download del file
+scaricaVistaScuole():void  {
+  this.downloadScuoleFile().subscribe(
+    (blob: Blob) => {
+      // Creare un oggetto URL per il blob scaricato
+      const url = window.URL.createObjectURL(blob);
+
+      // Creare un link temporaneo e avviare il download
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'scuole.xlsx'; 
+      document.body.appendChild(link);
+      link.click();
+
+      // Pulire l'URL creato per il blob
+      window.URL.revokeObjectURL(url);
+    },
+    (error) => {
+      console.error('Errore durante il download del file:', error);
+    }
+  );
+}
+downloadScuoleFile(): Observable<Blob> {
   
+  const url = 'http://localhost:8080/scuola/download';
+  let body = {name:"scuole.xlsx" };
+  console.log(body.name);
+  // Effettua una richiesta HTTP GET per scaricare il file
+ // Effettua una richiesta HTTP POST per scaricare il file
+ return this.http.post<Blob>(url, body, {
+  responseType: 'blob' as 'json', // Indica al server che ci aspettiamo un blob come risposta
+});
 
+}
 
+// Metodo per avviare il download del file
+scaricaVistarisulati():void  {
+  this.downloadRisFile().subscribe(
+    (blob: Blob) => {
+      // Creare un oggetto URL per il blob scaricato
+      const url = window.URL.createObjectURL(blob);
 
+      // Creare un link temporaneo e avviare il download
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'risultati.xlsx'; 
+      document.body.appendChild(link);
+      link.click();
+
+      // Pulire l'URL creato per il blob
+      window.URL.revokeObjectURL(url);
+    },
+    (error) => {
+      console.error('Errore durante il download del file:', error);
+    }
+  );
+}
+downloadRisFile(): Observable<Blob> {
+
+  const url = 'http://localhost:8080/risultati/download';
+  let body = {name:"risultati.xlsx" };
+  console.log(body.name);
+  // Effettua una richiesta HTTP GET per scaricare il file
+ // Effettua una richiesta HTTP POST per scaricare il file
+ return this.http.post<Blob>(url, body, {
+  responseType: 'blob' as 'json', // Indica al server che ci aspettiamo un blob come risposta
+});
+}
+  
 }

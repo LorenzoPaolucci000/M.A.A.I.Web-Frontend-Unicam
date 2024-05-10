@@ -18,13 +18,14 @@
           placeholder="Nome attività"
         />
 
-
+        <h3>Anno Accademico Inizio</h3>
   <div>
-    <label for="annoInizio">Anno accademico di inizio:</label>
+    <!--<label for="annoInizio">Anno accademico di inizio:</label>-->
     <input type="number" id="annoInizio" name="annoInizio" [(ngModel)]="annoAccademicoInizio" required minlength="4" maxlength="4">
   </div>
+  <h3>Anno Accademico Fine</h3>
   <div>
-    <label for="annoFine">Anno accademico di fine:</label>
+    <!--<label for="annoFine">Anno accademico di fine:</label>-->
     <input type="number" id="annoFine" name="annoFine" [(ngModel)]="annoAccademicoFine" required minlength="4" maxlength="4">
   </div>
 
@@ -53,24 +54,24 @@
 
 
 
-<div class="container">
-  <h2>Carica Definitivamente</h2>
-  <button (click)="toggleDropdown()" class="btn">Mostra Attività</button>
-  <div *ngIf="showDropdown" class="dropdown">
-    <h2>Attività Presenti</h2>
-    <select (change)="selectItem($event)">
-          
-       
-      <option *ngFor="let item of items">{{item}}</option>
-    </select>
+<!-- Parte della pagina HTML in alto a destra -->
+<div class="top-right">
+  <h2>Carica Attività Definitivamente</h2>
+  <div class="container">
+    <div>
+      <button (click)="toggleDropdown()">Mostra Attività</button>
+      <div *ngIf="showDropdown">
+        <h2>Attività Presenti</h2>
+        <select [(ngModel)]="selectedItem" (change)="onSelectionChange($event)">
+          <option *ngFor="let item of items" [value]="item">{{item}}</option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <button (click)="handleButtonClick()" class="btn">Carica Definitivamente</button>
+    </div>
   </div>
-
-  <div>
-    <button (click)="handleButtonClick()" class="btn">Carica Definitivamente</button>
-  </div>
-
 </div>
-
 
 
 </body>

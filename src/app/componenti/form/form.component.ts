@@ -19,10 +19,11 @@ export class FormdatComponent implements OnInit{
   private nome: string = '';
   private cognome: string = '';
   private visualizza: string = '';
-  //constructor(private http : HttpClient) { }
+   selectedItem: string='';
+
 
  constructor(private route: ActivatedRoute,private http : HttpClient) {
-  /*  this.route.url.subscribe(urlSegments => {
+  /* this.route.url.subscribe(urlSegments => {
       this.showAdminForm = urlSegments.some(segment => segment.path === 'admin');
     });
   */
@@ -33,15 +34,14 @@ export class FormdatComponent implements OnInit{
  
   }
 
-  //items: string[] = ['Opzione 1', 'Opzione 2', 'Opzione 3']; // Lista di stringhe
   showDropdown: boolean = false;
 
   toggleDropdown() {
     let array=this.getPendingActivities();
     array.subscribe(
       (result: string[]) => {
-        // Qui puoi utilizzare i valori emessi dall'Observable come un array di stringhe
-        this.items=result; // Stampa i valori su console
+        
+        this.items=result; 
       }
     );
 
@@ -65,9 +65,9 @@ export class FormdatComponent implements OnInit{
     const filepath:string=this.visualizza;
     console.log(nome);
     console.log(cognome);
-    console.log(filepath);
+    console.log(this.visualizza);
     let body = { nome,cognome,filepath};
-
+    
 
     this.http
       .post('http://localhost:8080/studente/addIscrizione1',body)
@@ -90,7 +90,14 @@ export class FormdatComponent implements OnInit{
   }
 
   selectItem(event: any) {
+  
 this.visualizza=event.target.value;
   }
+  onSelectionChange(event:any) {
+ this.visualizza=event.target.value;
+
+  }
+
+
 
 }
