@@ -1,40 +1,4 @@
-/*
-.container {
-    width: 50%;
-    margin: auto;
-  }
-  
-  .form-group {
-    margin-bottom: px;
-  }
-  
-  label {
-    display: block;
-    font-weight: bold;
-  }
-  
-  input[type="text"] {
-    width: 25%;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
 
-
-*/
 
 body {
   font-family: Arial, sans-serif;
@@ -63,12 +27,13 @@ h2 {
 input[type="text"],
 input[type="number"],
 select {
-  width: 25%;
+  width: 20%;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+
 }
 
 button {
@@ -100,8 +65,8 @@ button:hover {
 
 .top-right {
   position: absolute;
-  top: 20px; /* Distanza dal top */
-  right: 500px; /* Distanza dal right */
+  top: 0px; /* Distanza dal top */
+  right: 600px; /* Distanza dal right */
 }
 
 .container {
@@ -117,7 +82,7 @@ button:hover {
 }
 
 .btn {
-  background-color: #28a745;
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -126,5 +91,10 @@ button:hover {
 }
 
 .btn:hover {
-  background-color: #218838;
+  background-color: #007bff;
 }
+
+
+
+
+

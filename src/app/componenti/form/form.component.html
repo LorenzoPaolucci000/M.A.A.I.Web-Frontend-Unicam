@@ -7,22 +7,17 @@
 <body>
   
   <div>
-    <button (click)="toggleDropdown()">Mostra Attività</button>
+    <button (click)="toggleDropdown()">Mostra Attività Presenti</button>
     <div *ngIf="showDropdown">
-      <h2>Attività Presenti</h2>
+     
       <select [(ngModel)]="selectedItem" (change)="onSelectionChange($event)">
         <option *ngFor="let item of items" [value]="item">{{item}}</option>
       </select>
     </div>
   </div>
-
-
     <div>
         <h2>Iscriviti</h2>
         <form>
-        
-          
-
           <div>
             <input
             type="text"
@@ -43,11 +38,5 @@
         </form>
       </div>
       
- 
-
-
-
-   
-
 </body>
 </html>

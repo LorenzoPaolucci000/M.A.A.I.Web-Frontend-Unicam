@@ -90,9 +90,13 @@
               </div>
             </mat-expansion-panel>
           </mat-accordion>
-           <!-- Bottone per scaricare la vista scuole-->
-       <button mat-raised-button class="btn-scaricaScuole" id="scaricaScuoleButton"(click)="scaricaVistaScuole()">Scarica Vista Scuole</button>
-        </div>
+           <!-- Bottone per scaricare la vista scuole
+       <button mat-raised-button class="btn-scaricaScuole" id="scaricaScuoleButton"(click)="scaricaVistaScuole()">Scarica Vista Scuole</button>-->
+      
+       <button class="button"id="scaricaProfButton"(click)="scaricaVistaScuole()" >
+        <span class="button-content">Scarica Vista Scuole </span>
+      </button>
+      </div>
       </div>
     </div>
     <div *ngIf="click == 2">
@@ -118,20 +122,11 @@
               </ng-container>
             </p>
           </mat-expansion-panel>
-           <!-- Bottone per scaricare la vista professori -->
-       <button mat-raised-button class="btn-scaricaRisultati" id="scaricaRisButton"(click)="scaricaVistarisulati()">Scarica Vista Risultati</button>
-          <!-- <mat-card [ngStyle]="{'background': ris.universitarii.length >0 ? 'ligthgreen' : 'coral'}">
-              <mat-card-header>
-                <mat-card-title>{{ris.attivita}} Anno: {{annoVisual}}</mat-card-title>
-                  <mat-card-subtitle>Totale iscritti all'universita {{ ris.universitarii.length }}</mat-card-subtitle>
-              </mat-card-header>
-             <ng-container>
-              <mat-card-content>
-                <p *ngFor="let s of ris.universitarii">{{s.nome}}</p>
-                <mat-divider></mat-divider>
-              </mat-card-content>
-             </ng-container>
-            </mat-card> -->
+           <!-- Bottone per scaricare la vista professori 
+       <button mat-raised-button class="btn-scaricaRisultati" id="scaricaRisButton"(click)="scaricaVistarisulati()">Scarica Vista Risultati</button>-->
+       <button class="button"id="scaricaProfButton"(click)="scaricaVistarisulati()" >
+        <span class="button-content">Scarica Vista Risultati </span>
+      </button>
         </div>
       </div>
     </div>
@@ -155,9 +150,11 @@
           </mat-card-content>
 
         </mat-card>
-       <!-- Bottone per scaricare la vista professori -->
-       <button mat-raised-button class="btn-scarica" id="scaricaProfButton"(click)="scaricaVistaProfessori()">Scarica Vista Professori</button>
-      
+       <!-- Bottone per scaricare la vista professori 
+       <button mat-raised-button class="btn-scarica" id="scaricaProfButton"(click)="scaricaVistaProfessori()">Scarica Vista Professori</button>  -->
+       <button class="button"id="scaricaProfButton"(click)="scaricaVistaProfessori()" >
+        <span class="button-content">Scarica Vista Professori </span>
+      </button>
       </div>
 
 
