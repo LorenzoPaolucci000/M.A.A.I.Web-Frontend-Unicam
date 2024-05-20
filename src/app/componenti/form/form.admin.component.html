@@ -6,9 +6,9 @@
 </head>
 <body>
 
-
-
-<h2>Creazione attività vuota</h2>
+  <div class="centered-title">
+    <h2>Creazione attività vuota</h2>
+  </div>
 <form>
 
   <input
@@ -20,12 +20,12 @@
 
         <h3>Anno Accademico Inizio</h3>
   <div>
-    <!--<label for="annoInizio">Anno accademico di inizio:</label>-->
+    
     <input type="number" id="annoInizio" name="annoInizio"  [(ngModel)]="annoAccademicoInizio" required minlength="4" maxlength="4">
   </div>
   <h3>Anno Accademico Fine</h3>
   <div>
-    <!--<label for="annoFine">Anno accademico di fine:</label>-->
+
     <input type="number" id="annoFine" name="annoFine" [(ngModel)]="annoAccademicoFine" required minlength="4" maxlength="4">
   </div>
 
@@ -53,11 +53,11 @@
 
 
 
-
-<!-- Parte della pagina HTML in alto a destra -->
-<div class="top-right">
+<div class="centered-title">
   <h2>Carica Attività Definitivamente</h2>
-  <!--<div class="container">-->
+</div>
+ <form>
+ 
     <div>
       <button (click)="toggleDropdown()"class="btn">Mostra Attività</button>
       <div *ngIf="showDropdown">
@@ -72,9 +72,11 @@
     <div>
       <button (click)="handleButtonClick()" class="btn">Carica Definitivamente</button>
     </div>
-  <!-- </div> -->
-</div>
 
+</form>
 
 </body>
 </html>
+
+
+

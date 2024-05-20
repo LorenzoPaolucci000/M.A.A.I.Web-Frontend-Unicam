@@ -88,6 +88,7 @@ export class StatsComponent implements OnInit {
       complete: () => this.getProfessori(),
       error: (error) => console.log(error),
     });
+    console.log(this.scuole.length)
   }
 
   getUniversi(): void {
@@ -101,7 +102,7 @@ export class StatsComponent implements OnInit {
     this.resService.getRes().subscribe({
       next: (response) => (this.risultati = response),
       complete: () => {
-        this.anno = this.risultati[this.risultati.length - 1].annoAcc;
+        this.anno = this.risultati[this.risultati.length - 1].annoAcc;//cambiato 
         this.creaAnnoVisual(this.anno);
         this.createAnni(this.risultati[0].annoAcc, this.anno);
         this.setRisultati();
@@ -320,9 +321,11 @@ scaricaVistaScuole():void  {
   );
 }
 downloadScuoleFile(): Observable<Blob> {
-  
+  let  annoi=this.annoVisual.substring(0,this.annoVisual.indexOf("/"));
+let  annof=this.annoVisual.substring(this.annoVisual.indexOf("/")+1,this.annoVisual.length);
+let annot = parseInt(annoi)+parseInt(annof)+4000;
   const url = 'http://localhost:8080/scuola/download';
-  let body = {name:"scuole.xlsx" };
+  let body = {name:"scuole.xlsx",anno:annot };
   console.log(body.name);
   // Effettua una richiesta HTTP GET per scaricare il file
  // Effettua una richiesta HTTP POST per scaricare il file
@@ -356,9 +359,14 @@ scaricaVistarisulati():void  {
 }
 downloadRisFile(): Observable<Blob> {
 
+let  annoi=this.annoVisual.substring(0,this.annoVisual.indexOf("/"));
+let  annof=this.annoVisual.substring(this.annoVisual.indexOf("/")+1,this.annoVisual.length);
+let annot = parseInt(annoi)+parseInt(annof)+4000;
+console.log(annot);
+
   const url = 'http://localhost:8080/risultati/download';
-  let body = {name:"risultati.xlsx" };
-  console.log(body.name);
+  let body = {name:"risultati.xlsx",anno:annot};
+  //console.log(body.name);
   // Effettua una richiesta HTTP GET per scaricare il file
  // Effettua una richiesta HTTP POST per scaricare il file
  return this.http.post<Blob>(url, body, {
