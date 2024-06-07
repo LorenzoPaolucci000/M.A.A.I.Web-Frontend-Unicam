@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, toArray } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
+import { Sede } from 'src/app/interface/sede';
 @Component({
     selector: 'app-Admin',
     templateUrl: './form.admin.component.html',
@@ -23,19 +24,24 @@ export class AdminComponent implements OnInit {
   annoAccademicoFine: number=0;
   private nome: string = '';
   private scuola: string='';
-  private citta: string='';
+   citta: string='';
+   dataInizio: Date = new Date(); 
+   dataFine: Date = new Date(); 
+  private  tipo:string =''
   items: string[]=[];
+  scuole: string[]=[];
+  professori: string[]=[];
+  professoriUnicam: string[]=[];
   private visualizza:string='';
-
+  mostraCampoCitta: boolean = false;
+  sede: string='';
   selectedItem: string='';
-  //http: any;
+descrizione:string='';
+prof:string='';
+private visualizzaAtt:string='';
 
- /* constructor(private route: ActivatedRoute) {
-    this.route.url.subscribe(urlSegments => {
-      this.showAdminForm = urlSegments.some(segment => segment.path === 'admin');
-    });
-  
-  }*/
+
+
   
   ngOnInit(): void {
     
@@ -82,21 +88,39 @@ export class AdminComponent implements OnInit {
   }
 
   onClick() {
-
-    /*this.anno=this.annoAccademicoInizio+this.annoAccademicoFine;
-    let annoNome=+"" +this.anno+" "+this.nome;
-    let scuolaCitta=+""+ this.scuola+" "+this.citta;
-    scuolaCitta=scuolaCitta.substring(1);
-    console.log(annoNome);
-    console.log(scuolaCitta);
-    */
-   console.log();
     const nome:string=this.nome;
+    const tipo:string=this.tipo;
+    const scuola:string=this.scuola;
+   let sedeA:Sede=Sede.Online;
     const anno:number=this.anno=this.annoAccademicoInizio+this.annoAccademicoFine;
+    switch (this.sede) {
+      case "Online":
+          sedeA=Sede.Online;
+          break;
+      case "Università":
+        sedeA=Sede.Università;
+          break;
+      case "Scuola":
+        sedeA=Sede.Scuola;
+          break;
+      case "Altro":
+        sedeA=Sede.Altro;
+          break;
+  }
+    
     const nomeScuola:string=this.scuola;
     const cittaScuola:string=this.citta;
-    
-    let body = { nome,anno,nomeScuola,cittaScuola };
+    const dataInizio=this.dataInizio;
+    const dataFine=this.dataFine;
+    const descrizione=this.descrizione;
+    const profUnicam=this.selectedProf;
+    const profReferente=this.prof;
+
+   console.log(profReferente);
+   console.log(profUnicam);
+    console.log(scuola);
+    console.log(anno);
+    let body = {nome,tipo,scuola,anno,sedeA,dataInizio,dataFine,descrizione,profUnicam,profReferente};
     this.http
       .post<string>('http://localhost:8080/professori/createEmptyActivity1',body)
       .subscribe({
@@ -110,15 +134,19 @@ export class AdminComponent implements OnInit {
     this.nome = event.target.value;
     
   }
+  cambioTipo(event: any) {
+    this.tipo = event.target.value;
+    
+  }
   cambioCitta(event: any) {
     this.citta = event.target.value;
     
   }
-  cambioScuola(event: any) {
-    this.scuola = event.target.value;
+
+  cambioDescrizione(event: any) {
+    this.descrizione = event.target.value;
     
   }
-
 
    //items: string[] = ['Opzione 1', 'Opzione 2', 'Opzione 3']; // Lista di stringhe
    showDropdown: boolean = false;
@@ -137,6 +165,42 @@ export class AdminComponent implements OnInit {
  
      this.showDropdown = !this.showDropdown;
    }
+   showDropdownS: boolean = false;
+   toggleDropdownS() {
+    let array=this.getScuole();
+    array.subscribe(
+      (result: string[]) => {
+        // Qui puoi utilizzare i valori emessi dall'Observable come un array di stringhe
+        this.scuole=result; // Stampa i valori su console
+      }
+    );
+    this.showDropdownS = !this.showDropdownS;
+  }
+  showDropdownP: boolean = false;
+  toggleDropdownP() {
+    let array=this.getReferenti();
+    array.subscribe(
+      (result: string[]) => {
+        // Qui puoi utilizzare i valori emessi dall'Observable come un array di stringhe
+        this.professori=result; // Stampa i valori su console
+      }
+    );
+    this.showDropdownP = !this.showDropdownP;
+  }
+  showDropdownU: boolean = false;
+  toggleDropdownU() {
+    let array=this.getProfUnicam();
+    array.subscribe(
+      (result: string[]) => {
+        // Qui puoi utilizzare i valori emessi dall'Observable come un array di stringhe
+        this.professoriUnicam=result; // Stampa i valori su console
+      }
+    );
+    this.showDropdownU = !this.showDropdownU;
+  }
+
+
+
    getPendingActivities(): Observable<string[]> {
 
     return this.http.get<string[]>('http://localhost:8080/professori/getPendingActivities').pipe(
@@ -146,19 +210,43 @@ export class AdminComponent implements OnInit {
   }
 
 
-
+  getScuole( ):Observable<string[]>{
+    
+    return this.http.get<string[]>('http://localhost:8080/scuola/scuoleCitta/'+this.citta).pipe(
+      map((response: any) => response.map((scuola: any) => scuola.toString()))
+    );
+  }
+  getReferenti( ):Observable<string[]>{
+    
+    return this.http.get<string[]>('http://localhost:8080/professori/getReferenti').pipe(
+      map((response: any) => response.map((prof: any) => prof.toString()))
+    );
+  }
+  getProfUnicam( ):Observable<string[]>{
+    
+    return this.http.get<string[]>('http://localhost:8080/professoriUnicam/getProfUnicam').pipe(
+      map((response: any) => response.map((profUnicam: any) => profUnicam.toString()))
+    );
+  }
 
   handleButtonClick(): void {
+    const nomeAttivitaAnno:string=this.visualizzaAtt;
    
-    const nome:string=this.visualizza;
-    console.log(nome);
-    let body = { nome};
+    const nomeAttivita=nomeAttivitaAnno.substring(0,nomeAttivitaAnno.indexOf("4")-1);
+    const nome:string=this.visualizzaAtt;
+   
+    let body = {nome};
+    if(nome!=""){
     this.http
     .post('http://localhost:8080/professori/uploadActivityDefinitively',body)
     .subscribe({
       next: (response) => console.log(alert("inserimento avvenuto con successo"), response),
       error: (error) => console.log(error),
     });
+  }
+  else {
+    alert("N.B:Tutti i campi devono essere riempiti");
+  }
   }
 
   selectItem(event: any) {
@@ -167,9 +255,28 @@ export class AdminComponent implements OnInit {
 
 
       onSelectionChange(event:any) {
-        this.visualizza=event.target.value;
+        this.prof=event.target.value;
        
          }
+         onSelectionChangeS(event:any) {
+          this.scuola=event.target.value;
+         
+           }
+           onSelectionChangeAtt(event:any) {
+            this.visualizzaAtt=event.target.value;
+           
+             }
+
+         onSedeChange(event: Event): void {
+          const selectedSede = (event.target as HTMLSelectElement).value;
+          this.mostraCampoCitta = selectedSede === 'scuola';
+        }
+
+        selectedProf: string[] = [];
+  saveSelections() {
+    this.selectedProf;
+  }
+      
 }
 
 

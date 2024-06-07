@@ -1,23 +1,4 @@
-/* .btn1{
-  background-color: blue;
-  position: relative;
-  left: 10px;
-  top: 20px;
-}
-.btn2{
-  background-color: yellow;
-  position: relative;
-  left: 20px;
-  top: 20px;
-}
-.btn3{
-  background-color: green;
-  position: relative;
-  left: 40px;
-  top: 20px;
-} */
-/*questo è per la barra in alto cioè vista scuole,vista attività etc e divise per anno
-*/
+
 
 
 .container{
@@ -49,7 +30,7 @@
 }
 
 .bottoni>button{
-  width: 110px;
+  width: 120px;
 }
 
 .generato > div {
@@ -67,7 +48,10 @@
 }
 .btn4:hover{
   background-color: yellow;
+
 }
+
+
 
 mat-panel-description.right-aligned {
   flex-grow: 0;
@@ -96,7 +80,13 @@ mat-panel-description.right-aligned {
   background-color: green;
   color: white;
 }
-
+#scaricaProfUnicamButton {
+  position: fixed;
+  top: 100px; 
+  right: 105px; 
+  background-color: green;
+  color: white;
+}
 
 
 

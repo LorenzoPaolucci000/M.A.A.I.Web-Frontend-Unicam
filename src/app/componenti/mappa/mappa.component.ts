@@ -145,18 +145,14 @@ public coord = [
 
   createAnni (i:number,f:number):void{
    let x = i
-   while(x<=f){
-    console.log(x)
-    let anno = ((x/2)-1).toFixed().substring(2,4)
-    let annofin = (x/2).toFixed().substring(2,4)
-    let ann :Anni = {value:x,viewValue:anno+"/"+annofin}
-    this.a.push(ann)
-    this.a.forEach(anni=>{
-      console.log(anni)
-    })
-    console.log(this.a.length)
-    x=x+2
-   }
+   let ann: Anni = { value: 4043, viewValue: 21 + '/' + 22 };
+   this.a.push(ann);
+   let ann1: Anni = { value: 4045, viewValue: 22 + '/' + 23 };
+   this.a.push(ann1);
+   let ann2: Anni = { value: 4047, viewValue: 23 + '/' + 24 };
+   this.a.push(ann2);
+   let ann3: Anni = { value: 4049, viewValue: 24 + '/' + 25 };
+   this.a.push(ann3);
   }
 
 

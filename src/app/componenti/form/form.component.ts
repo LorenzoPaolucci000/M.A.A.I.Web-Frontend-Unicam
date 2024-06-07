@@ -18,10 +18,12 @@ export class FormdatComponent implements OnInit{
   item:string='';
   private nome: string = '';
   private cognome: string = '';
+  private email: string = '';
   private visualizza: string = '';
    selectedItem: string='';
-
-
+   citta: string='';
+   scuole: string[]=[];
+   private scuola: string='';
  constructor(private route: ActivatedRoute,private http : HttpClient) {
   /* this.route.url.subscribe(urlSegments => {
       this.showAdminForm = urlSegments.some(segment => segment.path === 'admin');
@@ -62,19 +64,36 @@ export class FormdatComponent implements OnInit{
   InviaIscrizione():void{
     const nome:string=this.nome;
     const cognome:string=this.cognome;
-    const filepath:string=this.visualizza;
-    console.log(nome);
-    console.log(cognome);
-    console.log(this.visualizza);
-    let body = { nome,cognome,filepath};
-    
+    const email:string=this.email;
+   const nomeAttivitaAnno:string=this.visualizza;
+   
+  const nomeAttivita=nomeAttivitaAnno.substring(0,nomeAttivitaAnno.indexOf("4"));
 
+  const anno=parseInt(nomeAttivitaAnno.substring(nomeAttivitaAnno.indexOf("4")));
+  const scuola=this.scuola;
+  console.log(nomeAttivitaAnno)
+  console.log(nome);
+  console.log(cognome);
+  console.log(email);
+  console.log(nomeAttivita);
+  console.log(anno);
+  console.log(scuola);
+    let body = {nome,cognome,email,nomeAttivita,anno,scuola};
+    
+if(nomeAttivita!=""&&nome!=""&&cognome!=""&&email!=""&&scuola!=""){
     this.http
       .post('http://localhost:8080/studente/addIscrizione1',body)
       .subscribe({
         next: (response) => console.log(alert("inserimento avvenuto con successo"), response),
         error: (error) => console.log(error),
       });
+
+    }
+    else {
+      alert("N.B:Tutti i campi devono essere riempiti");
+    }
+
+
   }
 
 
@@ -88,7 +107,14 @@ export class FormdatComponent implements OnInit{
     this.cognome = event.target.value;
     
   }
-
+  cambioEmail(event: any) {
+    this.email = event.target.value;
+    
+  }
+  cambioCitta(event: any) {
+    this.citta = event.target.value;
+    
+  }
   selectItem(event: any) {
   
 this.visualizza=event.target.value;
@@ -98,6 +124,25 @@ this.visualizza=event.target.value;
 
   }
 
-
-
+  onSelectionChangeS(event:any) {
+    this.scuola=event.target.value;
+   
+     }
+     showDropdownS: boolean = false;
+     toggleDropdownS() {
+      let array=this.getScuole();
+      array.subscribe(
+        (result: string[]) => {
+          // Qui puoi utilizzare i valori emessi dall'Observable come un array di stringhe
+          this.scuole=result; // Stampa i valori su console
+        }
+      );
+      this.showDropdownS = !this.showDropdownS;
+    }
+    getScuole( ):Observable<string[]>{
+    
+      return this.http.get<string[]>('http://localhost:8080/scuola/scuoleCitta/'+this.citta).pipe(
+        map((response: any) => response.map((scuola: any) => scuola.toString()))
+      );
+    }
 }

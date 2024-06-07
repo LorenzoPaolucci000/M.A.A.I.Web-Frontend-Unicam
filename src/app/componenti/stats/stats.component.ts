@@ -11,23 +11,24 @@ import { Anni } from 'src/app/interface/anni';
 import { ProfessoriService } from 'src/app/service/professori.service';
 import { Professori } from 'src/app/interface/professori';
 import { Profvisual } from 'src/app/interface/profvisual';
+import { ProfUnicamvisual } from 'src/app/interface/profUnicamVisual';
+import { ProfessoriUnicam } from 'src/app/interface/professoriUnicam';
+import { ProfessoriUnicamService } from 'src/app/service/professoriUnicam.service';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, toArray } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.component.html',
   styleUrls: ['./stats.component.css'],
 })
 export class StatsComponent implements OnInit {
-  
   constructor(private http: HttpClient,
     private scuolaService: ScuoleService,
     private universiService: UniversiService,
     private resService: ResService,
     private resatService: ResattService,
-    private professoriService: ProfessoriService
+    private professoriService: ProfessoriService,
+    private professoriUnicamService: ProfessoriUnicamService
   ) {}
 
 
@@ -37,22 +38,23 @@ export class StatsComponent implements OnInit {
   public risatt: Risatt[] = [];
   public anni: Anni[] = [];
   public prof: Professori[] = [];
+  public profUnicam: ProfessoriUnicam[] = [];
   public profVisual : Profvisual[] =[]
+  public profUnicamVisual : ProfUnicamvisual[] =[]
   public click = 0;
   public anno = 0;
   public annoVisual = '';
   public visualRis: Res[] = [];
   public visualRisAtt: Risatt[] = [];
-  
   public ordinamenti = 'ISCRITTI';
-  public ordinamentiAtt = 'ISCRITTI';
-  public ordinamentiProf='ISCRITTI';
+  public ordinamentiAtt = 'ISCRITTI'
+
   ngOnInit(): void {
     this.getRes();
     this.getResatt();
     this.getScuole();
     this.getUniversi();
-    //this.getProfessori();
+    this.getProfessoriUnicam();
   }
 
   getProfessori(): void {
@@ -73,11 +75,32 @@ export class StatsComponent implements OnInit {
         let id = p.email
         let prof = {email:p.email,nome: nome,cognome:cognome,scuolaImp:p.scuolaImp,attivita:p.attivita}
         this.scuole.forEach(s=>{
-          if(s.idScuola== prof.scuolaImp){
+          if(s.idScuola== prof.scuolaImp.idScuola){
             let provis:Profvisual = {professore : prof,scuola :s}
             this.profVisual.push(provis)
           }
         })
+      })
+    }
+  }
+  getProfessoriUnicam(): void {
+    this.professoriUnicamService.getProfessori().subscribe({
+      next: (response) => (this.profUnicam = response),
+      complete: () => {
+        this.createProfUnicamVisual()
+        },
+      error: (error) => console.log(error),
+    });
+  }
+  createProfUnicamVisual(){
+    if(this.profUnicam.length>0){
+      this.profUnicam.forEach(pUnicam=>{
+        let nome = pUnicam.nome.toUpperCase();
+        let cognome = pUnicam.cognome.toUpperCase();
+        let id = pUnicam.email
+        let profUnicam = {email:pUnicam.email,nome: nome,cognome:cognome}
+        let provis:ProfUnicamvisual = {professore : profUnicam}
+        this.profUnicamVisual.push(provis)
       })
     }
   }
@@ -88,7 +111,6 @@ export class StatsComponent implements OnInit {
       complete: () => this.getProfessori(),
       error: (error) => console.log(error),
     });
-    console.log(this.scuole.length)
   }
 
   getUniversi(): void {
@@ -102,7 +124,7 @@ export class StatsComponent implements OnInit {
     this.resService.getRes().subscribe({
       next: (response) => (this.risultati = response),
       complete: () => {
-        this.anno = this.risultati[this.risultati.length - 1].annoAcc;//cambiato 
+        this.anno = this.risultati[this.risultati.length - 1].annoAcc;
         this.creaAnnoVisual(this.anno);
         this.createAnni(this.risultati[0].annoAcc, this.anno);
         this.setRisultati();
@@ -171,7 +193,7 @@ export class StatsComponent implements OnInit {
   }
 
   createAnni(i: number, f: number) {
-    let x = i;
+   
     /*while (x <= f) {
       let anno = (x / 2 - 1).toFixed().substring(2, 4);
       let annofin = (x / 2).toFixed().substring(2, 4);
@@ -187,6 +209,7 @@ export class StatsComponent implements OnInit {
     this.anni.push(ann2);
     let ann3: Anni = { value: 4049, viewValue: 24 + '/' + 25 };
     this.anni.push(ann3);
+
   }
 
   onClick1() {
@@ -210,9 +233,7 @@ export class StatsComponent implements OnInit {
   ordina() {
     if (this.visualRis.length > 0) {
       switch (this.ordinamenti) {
-        case 'ISCRITTI':
-          this.visualRis.sort((a, b) => b.iscritti.length - a.iscritti.length);
-          break;
+       
         case 'REGIONI':
           this.visualRis.sort((a, b) =>
             a.scuola.regione.localeCompare(b.scuola.regione)
@@ -243,22 +264,8 @@ export class StatsComponent implements OnInit {
         break;
     }
   }
-  cambioOrdinamentoProf(e: any) {
-    this.ordinamentiProf=e
-    switch (this.ordinamentiProf) {
-      case 'COGNOME':
-        this.profVisual.sort(
-          (a, b) =>a.professore.cognome.localeCompare(b.professore.cognome)
-        );
-        break;
-      case 'NOME':
-        this.profVisual.sort((a, b) => a.professore.nome.localeCompare(b.professore.nome));
-        break;
-      default:
-        break;
-    }
-  }
- 
+
+
  // Metodo per avviare il download del file
  scaricaVistaProfessori():void  {
   this.downloadProfFile().subscribe(
@@ -291,16 +298,14 @@ downloadProfFile(): Observable<Blob> {
   responseType: 'blob' as 'json', // Indica al server che ci aspettiamo un blob come risposta
 });
 
-
- 
-
-
 }
 
 
-// Metodo per avviare il download del file
-scaricaVistaScuole():void  {
-  this.downloadScuoleFile().subscribe(
+
+
+ // Metodo per avviare il download del file
+ scaricaVistaProfessoriUnicam():void  {
+  this.downloadProfUnicamFile().subscribe(
     (blob: Blob) => {
       // Creare un oggetto URL per il blob scaricato
       const url = window.URL.createObjectURL(blob);
@@ -308,7 +313,7 @@ scaricaVistaScuole():void  {
       // Creare un link temporaneo e avviare il download
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'scuole.xlsx'; 
+      link.download = 'professoriUnicam.xlsx'; 
       document.body.appendChild(link);
       link.click();
 
@@ -320,12 +325,9 @@ scaricaVistaScuole():void  {
     }
   );
 }
-downloadScuoleFile(): Observable<Blob> {
-  let  annoi=this.annoVisual.substring(0,this.annoVisual.indexOf("/"));
-let  annof=this.annoVisual.substring(this.annoVisual.indexOf("/")+1,this.annoVisual.length);
-let annot = parseInt(annoi)+parseInt(annof)+4000;
-  const url = 'http://localhost:8080/scuola/download';
-  let body = {name:"scuole.xlsx",anno:annot };
+downloadProfUnicamFile(): Observable<Blob> {
+  const url = 'http://localhost:8080/professoriUnicam/download';
+  let body = {name:"professoriUnicam.xlsx" };
   console.log(body.name);
   // Effettua una richiesta HTTP GET per scaricare il file
  // Effettua una richiesta HTTP POST per scaricare il file
@@ -334,7 +336,6 @@ let annot = parseInt(annoi)+parseInt(annof)+4000;
 });
 
 }
-
 // Metodo per avviare il download del file
 scaricaVistarisulati():void  {
   this.downloadRisFile().subscribe(
@@ -373,5 +374,43 @@ console.log(annot);
   responseType: 'blob' as 'json', // Indica al server che ci aspettiamo un blob come risposta
 });
 }
-  
+// Metodo per avviare il download del file
+scaricaVistaScuole():void  {
+  this.downloadScuoleFile().subscribe(
+    (blob: Blob) => {
+      // Creare un oggetto URL per il blob scaricato
+      const url = window.URL.createObjectURL(blob);
+
+      // Creare un link temporaneo e avviare il download
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'scuole.xlsx'; 
+      document.body.appendChild(link);
+      link.click();
+
+      // Pulire l'URL creato per il blob
+      window.URL.revokeObjectURL(url);
+    },
+    (error) => {
+      console.error('Errore durante il download del file:', error);
+    }
+  );
+}
+downloadScuoleFile(): Observable<Blob> {
+  let  annoi=this.annoVisual.substring(0,this.annoVisual.indexOf("/"));
+let  annof=this.annoVisual.substring(this.annoVisual.indexOf("/")+1,this.annoVisual.length);
+let annot = parseInt(annoi)+parseInt(annof)+4000;
+  const url = 'http://localhost:8080/scuola/download';
+  let body = {name:"scuole.xlsx",anno:annot };
+  console.log(body.name);
+  // Effettua una richiesta HTTP GET per scaricare il file
+ // Effettua una richiesta HTTP POST per scaricare il file
+ return this.http.post<Blob>(url, body, {
+  responseType: 'blob' as 'json', // Indica al server che ci aspettiamo un blob come risposta
+});
+
+}
+
+
+
 }
