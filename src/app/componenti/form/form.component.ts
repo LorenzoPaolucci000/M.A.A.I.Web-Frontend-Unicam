@@ -95,7 +95,12 @@ if(nomeAttivita!=""&&nome!=""&&cognome!=""&&email!=""&&scuola!=""){
 
 
   }
-
+  getScuole( ):Observable<string[]>{
+    
+    return this.http.get<string[]>('http://localhost:8080/scuola/scuoleCitta/'+this.citta).pipe(
+      map((response: any) => response.map((scuola: any) => scuola.toString()))
+    );
+  }
 
 
   
@@ -139,10 +144,5 @@ this.visualizza=event.target.value;
       );
       this.showDropdownS = !this.showDropdownS;
     }
-    getScuole( ):Observable<string[]>{
-    
-      return this.http.get<string[]>('http://localhost:8080/scuola/scuoleCitta/'+this.citta).pipe(
-        map((response: any) => response.map((scuola: any) => scuola.toString()))
-      );
-    }
+ 
 }

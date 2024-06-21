@@ -47,7 +47,9 @@ export class StatsComponent implements OnInit {
   public visualRis: Res[] = [];
   public visualRisAtt: Risatt[] = [];
   public ordinamenti = 'ISCRITTI';
-  public ordinamentiAtt = 'ISCRITTI'
+  public ordinamentiAtt = 'ISCRITTI';
+  public searchButton = document.getElementById('searchButton') as HTMLButtonElement;
+public searchInput = document.getElementById('searchInput') as HTMLInputElement;
 
   ngOnInit(): void {
     this.getRes();
@@ -410,6 +412,13 @@ let annot = parseInt(annoi)+parseInt(annof)+4000;
 });
 
 }
+
+
+
+
+
+
+
 
 
 

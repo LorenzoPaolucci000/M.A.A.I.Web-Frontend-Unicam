@@ -40,7 +40,7 @@
 
 
 
-  <div *ngIf="mostraCampoCitta">
+
       <label for="citta">Città</label>
       <input type="text" id="citta" name="citta" [(ngModel)]="citta" (change)="cambioCitta($event)" required>
       <button (click)="toggleDropdownS()"class="btn">Cerca Scuola!</button>
@@ -53,7 +53,7 @@
           <option *ngFor="let scuola of scuole" [value]="scuola">{{scuola}}</option>
         </select>
       </div>
-  </div>
+ 
 
 
 
@@ -144,7 +144,7 @@
 
 
 <div class="centered-title">
-  <h2>Carica Attività Definitivamente</h2>
+  <h2>Termina Possibilità Iscrizione </h2>
 </div>
  <form>
  
@@ -160,7 +160,7 @@
       </div>
     </div>
     <div>
-      <button (click)="handleButtonClick()" class="btn">Carica Definitivamente</button>
+      <button (click)="handleButtonClick()" class="btn">Termina Iscrizione </button>
     </div>
 
 </form>

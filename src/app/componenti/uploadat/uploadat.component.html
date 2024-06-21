@@ -300,10 +300,10 @@
           <mat-label>Seleziona tipo Upload</mat-label>
           <mat-select (selectionChange)="cambioSel($event.value)">
             <mat-option value="ATT">Upload Attività</mat-option>
-            <mat-option value="ISCR">Upload Iscritti</mat-option>
-            <mat-option value="PROF">Upload Professori</mat-option>
+            <mat-option value="ISCR">Upload Immatricolati</mat-option>
+            <mat-option value="PROF">Upload Professori Scuole</mat-option>
             <mat-option value="PROFUNICAM">Upload Professori Unicam</mat-option>
-            <mat-option value="SINGLEPROF">Upload Single Professore</mat-option>
+            <mat-option value="SINGLEPROF">Upload Single Professore Scuole</mat-option>
             <mat-option value="SINGLEPROFUNICAM">Upload Single Professore Unicam</mat-option>
           </mat-select>
         </mat-form-field>
@@ -323,8 +323,8 @@
             </select>
           </div>
 
-          <div *ngIf="mostraCampoCitta">
-            <label for="citta">Città</label>
+         
+            <label for="citta">Città della Scuola</label>
             <input type="text" id="citta" name="citta" [(ngModel)]="citta" (change)="cambioCitta($event)" required>
             <button (click)="toggleDropdownS()" class="btn">Cerca Scuola!</button>
             <div *ngIf="showDropdownS">
@@ -333,7 +333,7 @@
                 <option *ngFor="let scuola of scuole" [value]="scuola">{{scuola}}</option>
               </select>
             </div>
-          </div>
+         
 <!--
           <div>
             <label for="annoInizio">Anno accademico di inizio:</label>
@@ -435,7 +435,7 @@
               <input type="text" id="text" (change)="cambioEmail($event)" placeholder="Email" />
             </div>
             <div>
-              <label for="citta">Città</label>
+              <label for="citta">Città della Scuola</label>
               <input type="text" id="citta" name="citta" [(ngModel)]="citta" (change)="cambioCitta($event)" required>
               <button (click)="toggleDropdownS()" class="btn">Cerca Scuola!</button>
               <div *ngIf="showDropdownS">
