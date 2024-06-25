@@ -145,13 +145,13 @@ public coord = [
 
   createAnni (i:number,f:number):void{
    let x = i
-   let ann: Anni = { value: 4043, viewValue: 21 + '/' + 22 };
+   let ann: Anni = { value: 20212022, viewValue: 21 + '/' + 22 };
    this.a.push(ann);
-   let ann1: Anni = { value: 4045, viewValue: 22 + '/' + 23 };
+   let ann1: Anni = { value: 20222023, viewValue: 22 + '/' + 23 };
    this.a.push(ann1);
-   let ann2: Anni = { value: 4047, viewValue: 23 + '/' + 24 };
+   let ann2: Anni = { value: 20232024, viewValue: 23 + '/' + 24 };
    this.a.push(ann2);
-   let ann3: Anni = { value: 4049, viewValue: 24 + '/' + 25 };
+   let ann3: Anni = { value: 20242025, viewValue: 24 + '/' + 25 };
    this.a.push(ann3);
   }
 

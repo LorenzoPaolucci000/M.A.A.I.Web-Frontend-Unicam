@@ -310,6 +310,7 @@
       </div>
       <div class="upload">
         <div class="attivita" *ngIf="visualizza == 'ATT'">
+         
           <input type="text" id="text" (change)="cambioNome($event)" placeholder="Nome attività" />
           <input type="text" id="text" (change)="cambioTipo($event)" placeholder="Tipo attività" />
 
@@ -396,6 +397,7 @@
 
           <input type="file" accept=".xlsx" (change)="onChangeFile($event)" />
           <button (click)="submitAttForm()">Carica!</button>
+        
         </div>
 
         <div class="iscritt" *ngIf="visualizza == 'ISCR'">

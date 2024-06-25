@@ -92,7 +92,7 @@ private visualizzaAtt:string='';
     const tipo:string=this.tipo;
     const scuola:string=this.scuola;
    let sedeA:Sede=Sede.Online;
-    const anno:number=this.anno=this.annoAccademicoInizio+this.annoAccademicoFine;
+    const anno:number=this.anno=this.annoAccademicoInizio*10000+this.annoAccademicoFine;
     switch (this.sede) {
       case "Online":
           sedeA=Sede.Online;

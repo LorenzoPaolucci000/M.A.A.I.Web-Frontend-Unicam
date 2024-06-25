@@ -127,7 +127,9 @@ public searchInput = document.getElementById('searchInput') as HTMLInputElement;
       next: (response) => (this.risultati = response),
       complete: () => {
         this.anno = this.risultati[this.risultati.length - 1].annoAcc;
+        
         this.creaAnnoVisual(this.anno);
+
         this.createAnni(this.risultati[0].annoAcc, this.anno);
         this.setRisultati();
         this.ordina();
@@ -138,8 +140,11 @@ public searchInput = document.getElementById('searchInput') as HTMLInputElement;
   }
 
   creaAnnoVisual(a: number) {
-    let ain = (a / 2 - 1).toFixed().substring(2, 4);
-    let afin = (a / 2).toFixed().substring(2, 4);
+    let aI=  Math.floor(a/10000);
+    let aF=a%10000
+    let ain = (aI%100);
+    let afin = (aF%100);
+    
     this.annoVisual = ain + '/' + afin;
   }
   setRisultati() {
@@ -203,13 +208,13 @@ public searchInput = document.getElementById('searchInput') as HTMLInputElement;
       this.anni.push(ann);
       x = x + 2;
     }*/
-    let ann: Anni = { value: 4043, viewValue: 21 + '/' + 22 };
+    let ann: Anni = { value: 20212022, viewValue: 21 + '/' + 22 };
     this.anni.push(ann);
-    let ann1: Anni = { value: 4045, viewValue: 22 + '/' + 23 };
+    let ann1: Anni = { value: 20222023, viewValue: 22 + '/' + 23 };
     this.anni.push(ann1);
-    let ann2: Anni = { value: 4047, viewValue: 23 + '/' + 24 };
+    let ann2: Anni = { value: 20232024, viewValue: 23 + '/' + 24 };
     this.anni.push(ann2);
-    let ann3: Anni = { value: 4049, viewValue: 24 + '/' + 25 };
+    let ann3: Anni = { value: 20242025, viewValue: 24 + '/' + 25 };
     this.anni.push(ann3);
 
   }
@@ -364,7 +369,7 @@ downloadRisFile(): Observable<Blob> {
 
 let  annoi=this.annoVisual.substring(0,this.annoVisual.indexOf("/"));
 let  annof=this.annoVisual.substring(this.annoVisual.indexOf("/")+1,this.annoVisual.length);
-let annot = parseInt(annoi)+parseInt(annof)+4000;
+let annot = ((parseInt(annoi)+2000)*10000)+(parseInt(annof)+2000);
 console.log(annot);
 
   const url = 'http://localhost:8080/risultati/download';
@@ -401,7 +406,7 @@ scaricaVistaScuole():void  {
 downloadScuoleFile(): Observable<Blob> {
   let  annoi=this.annoVisual.substring(0,this.annoVisual.indexOf("/"));
 let  annof=this.annoVisual.substring(this.annoVisual.indexOf("/")+1,this.annoVisual.length);
-let annot = parseInt(annoi)+parseInt(annof)+4000;
+let annot =((parseInt(annoi)+2000)*10000)+(parseInt(annof)+2000);
   const url = 'http://localhost:8080/scuola/download';
   let body = {name:"scuole.xlsx",anno:annot };
   console.log(body.name);

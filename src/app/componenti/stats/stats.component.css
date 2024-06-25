@@ -2,8 +2,9 @@
 
 
 .container{
+ 
   display: block;
-  max-width: 1200px;
+  max-width:1200px;
   margin: 0 auto;
   padding: 0 24px;
 
@@ -60,30 +61,31 @@ mat-panel-description.right-aligned {
 }
 
 #scaricaProfButton {
-  position: fixed;
-  top: 100px; 
-  right: 105px; 
+  position: absolute;
+  top: 65px; 
+  right: 600px; 
   background-color: green;
   color: white;
 }
 #scaricaScuoleButton {
-  position: fixed;
-  top: 100px; 
-  right: 105px; 
+  position: absolute;
+  top: 75px; 
+  right: 600px; 
   background-color: green;
   color: white;
+
 }
 #scaricaRisButton{
-  position: fixed;
-  top: 100px; 
-  right: 105px;
+  position: absolute;
+  top: 75px; 
+  right: 600px;
   background-color: green;
   color: white;
 }
 #scaricaProfUnicamButton {
-  position: fixed;
-  top: 100px; 
-  right: 105px; 
+  position: absolute;
+  top: 65px; 
+  right: 600px; 
   background-color: green;
   color: white;
 }
@@ -128,4 +130,8 @@ mat-panel-description.right-aligned {
     rgba(99, 88, 238, 1) 94.3%
   );
   transition: all 0.475s;
+}
+
+.spazio {
+  margin-top: 50px; /* Cambia il valore per avere più o meno spazio */
 }

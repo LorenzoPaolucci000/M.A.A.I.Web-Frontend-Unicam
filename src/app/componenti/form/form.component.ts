@@ -67,9 +67,9 @@ export class FormdatComponent implements OnInit{
     const email:string=this.email;
    const nomeAttivitaAnno:string=this.visualizza;
    
-  const nomeAttivita=nomeAttivitaAnno.substring(0,nomeAttivitaAnno.indexOf("4"));
+  const nomeAttivita=nomeAttivitaAnno.substring(0,nomeAttivitaAnno.indexOf("2"));
 
-  const anno=parseInt(nomeAttivitaAnno.substring(nomeAttivitaAnno.indexOf("4")));
+  const anno=parseInt(nomeAttivitaAnno.substring(nomeAttivitaAnno.indexOf("2")));
   const scuola=this.scuola;
   console.log(nomeAttivitaAnno)
   console.log(nome);

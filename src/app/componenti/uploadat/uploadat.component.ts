@@ -81,7 +81,7 @@ cambioDescrizione(event: any) {
      }
 
   onClickIscr() {
-    let anno=this.annoAccademicoInizio+this.annoAccademicoFine;
+    let anno=this.annoAccademicoInizio*10000+this.annoAccademicoFine;
     this.http
   
       .post('http://localhost:8080/universitari/uploadConAnno1/'+ ""+anno, this.dataIscr)
@@ -97,7 +97,9 @@ cambioDescrizione(event: any) {
     const tipo:string=this.tipo;
     const scuola:string=this.scuola;
    let sedeA:Sede=Sede.Online;
-    const anno:number=this.anno=this.annoAccademicoInizio+this.annoAccademicoFine;
+  
+    const anno:number=this.anno=this.annoAccademicoInizio*10000+this.annoAccademicoFine;
+    console.log(anno);
     switch (this.sede) {
       case "Online":
           sedeA=Sede.Online;
@@ -124,7 +126,7 @@ cambioDescrizione(event: any) {
    console.log(profUnicam);
     console.log(scuola);
     const file=this.file;
-    let body = {nome,tipo,scuola,anno,sedeA,dataInizio,dataFine,descrizione,profUnicam,profReferente,file };
+   // let body = {nome,tipo,scuola,anno,sedeA,dataInizio,dataFine,descrizione,profUnicam,profReferente,file };
     let param;
     if(scuola==""){
 param=nome+"&"+tipo+scuola+" "+this.sede+"-"+dataInizio.toString()+" "+dataFine.toString()+" "+descrizione+"+"+profUnicam+",+"+profReferente+"-"+anno.toString();
