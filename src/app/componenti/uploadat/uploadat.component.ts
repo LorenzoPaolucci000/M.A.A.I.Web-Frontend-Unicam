@@ -99,7 +99,7 @@ cambioDescrizione(event: any) {
    let sedeA:Sede=Sede.Online;
   
     const anno:number=this.anno=this.annoAccademicoInizio*10000+this.annoAccademicoFine;
-    console.log(anno);
+   
     switch (this.sede) {
       case "Online":
           sedeA=Sede.Online;
@@ -122,11 +122,9 @@ cambioDescrizione(event: any) {
     const descrizione=this.descrizione;
     const profUnicam=this.selectedProf;
     const profReferente=this.prof;
-   console.log(profReferente);
-   console.log(profUnicam);
-    console.log(scuola);
+  
     const file=this.file;
-   // let body = {nome,tipo,scuola,anno,sedeA,dataInizio,dataFine,descrizione,profUnicam,profReferente,file };
+  
     let param;
     if(scuola==""){
 param=nome+"&"+tipo+scuola+" "+this.sede+"-"+dataInizio.toString()+" "+dataFine.toString()+" "+descrizione+"+"+profUnicam+",+"+profReferente+"-"+anno.toString();
@@ -176,12 +174,12 @@ console.log(this.sede);
 
   cambio(event: any) {
     this.nome = event.target.value;
-    console.log(this.nome);
+    
   }
 
   cambioSel(e: any) {
     this.visualizza = e;
-    console.log(this.visualizza);
+    
   }
 
 
@@ -202,7 +200,7 @@ console.log(this.sede);
 
   cambioAnno(e: any) {
     this.anno=e;
-    console.log(this.anno)
+    
   }
 
   ngOnInit(): void {
@@ -237,8 +235,7 @@ console.log(this.sede);
   submitAttForm() {
     if (this.validateYears()) {
       // Puoi eseguire qui le operazioni che desideri con i valori degli anni accademici
-      console.log('Anno accademico di inizio:', this.annoAccademicoInizio);
-      console.log('Anno accademico di fine:', this.annoAccademicoFine);
+      
       this.onClick();
     } else {
       alert("Controlla gli anni accademici inseriti gli anni devono avere 4 cifre e l'anno inserito sotto deve essere quello sopra + 1.");
@@ -247,8 +244,7 @@ console.log(this.sede);
   submitIscrForm() {
     if (this.validateYears()) {
       // Puoi eseguire qui le operazioni che desideri con i valori degli anni accademici
-      console.log('Anno accademico di inizio:', this.annoAccademicoInizio);
-      console.log('Anno accademico di fine:', this.annoAccademicoFine);
+ 
       this.onClickIscr()
     } else {
       alert("Controlla gli anni accademici inseriti gli anni devono avere 4 cifre e l'anno inserito sotto deve essere quello sopra + 1.");
@@ -300,11 +296,7 @@ console.log(this.sede);
 
   const scuola=this.scuola;
   const citta=this.citta;
-  console.log(nome);
-  console.log(cognome);
-  console.log(email);
-  console.log(attivita);
-  console.log(scuola);
+
     let body = {email,nome,cognome,scuola,citta,attivita};
     
 if(nome!=""&&cognome!=""&&email!=""&&attivita!=""&&scuola!=""){
@@ -326,9 +318,6 @@ if(nome!=""&&cognome!=""&&email!=""&&attivita!=""&&scuola!=""){
     const email:string=this.email;
    
 
-  console.log(nome);
-  console.log(cognome);
-  console.log(email);
 
     let body = {email,nome,cognome};
     

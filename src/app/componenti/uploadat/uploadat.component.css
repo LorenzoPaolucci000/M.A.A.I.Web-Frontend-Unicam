@@ -14,9 +14,8 @@ body {
  
 }
 
-/* Stile per il contenitore principale */
 .container {
-  height: 800px; /* Imposta l'altezza fissa desiderata */
+  height: 800px; 
   width: 80%;
   max-width: 800px;
   padding: 20px;
@@ -30,13 +29,12 @@ body {
   
 }
 
-/* Stile per il titolo */
 h1 {
   text-align: center;
   color: #333;
 }
 
-/* Stile per la selezione del tipo di upload */
+
 .select-container {
   width: 100%;
   margin: 20px 0;

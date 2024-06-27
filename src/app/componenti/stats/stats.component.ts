@@ -201,13 +201,7 @@ public searchInput = document.getElementById('searchInput') as HTMLInputElement;
 
   createAnni(i: number, f: number) {
    
-    /*while (x <= f) {
-      let anno = (x / 2 - 1).toFixed().substring(2, 4);
-      let annofin = (x / 2).toFixed().substring(2, 4);
-      let ann: Anni = { value: x, viewValue: anno + '/' + annofin };
-      this.anni.push(ann);
-      x = x + 2;
-    }*/
+
     let ann: Anni = { value: 20212022, viewValue: 21 + '/' + 22 };
     this.anni.push(ann);
     let ann1: Anni = { value: 20222023, viewValue: 22 + '/' + 23 };
@@ -298,11 +292,10 @@ public searchInput = document.getElementById('searchInput') as HTMLInputElement;
 downloadProfFile(): Observable<Blob> {
   const url = 'http://localhost:8080/professori/download';
   let body = {name:"professori.xlsx" };
-  console.log(body.name);
-  // Effettua una richiesta HTTP GET per scaricare il file
- // Effettua una richiesta HTTP POST per scaricare il file
+ 
+  
  return this.http.post<Blob>(url, body, {
-  responseType: 'blob' as 'json', // Indica al server che ci aspettiamo un blob come risposta
+  responseType: 'blob' as 'json', 
 });
 
 }
@@ -335,11 +328,10 @@ downloadProfFile(): Observable<Blob> {
 downloadProfUnicamFile(): Observable<Blob> {
   const url = 'http://localhost:8080/professoriUnicam/download';
   let body = {name:"professoriUnicam.xlsx" };
-  console.log(body.name);
-  // Effettua una richiesta HTTP GET per scaricare il file
- // Effettua una richiesta HTTP POST per scaricare il file
+
+ 
  return this.http.post<Blob>(url, body, {
-  responseType: 'blob' as 'json', // Indica al server che ci aspettiamo un blob come risposta
+  responseType: 'blob' as 'json', 
 });
 
 }
@@ -370,13 +362,11 @@ downloadRisFile(): Observable<Blob> {
 let  annoi=this.annoVisual.substring(0,this.annoVisual.indexOf("/"));
 let  annof=this.annoVisual.substring(this.annoVisual.indexOf("/")+1,this.annoVisual.length);
 let annot = ((parseInt(annoi)+2000)*10000)+(parseInt(annof)+2000);
-console.log(annot);
+
 
   const url = 'http://localhost:8080/risultati/download';
   let body = {name:"risultati.xlsx",anno:annot};
-  //console.log(body.name);
-  // Effettua una richiesta HTTP GET per scaricare il file
- // Effettua una richiesta HTTP POST per scaricare il file
+
  return this.http.post<Blob>(url, body, {
   responseType: 'blob' as 'json', // Indica al server che ci aspettiamo un blob come risposta
 });
@@ -409,9 +399,8 @@ let  annof=this.annoVisual.substring(this.annoVisual.indexOf("/")+1,this.annoVis
 let annot =((parseInt(annoi)+2000)*10000)+(parseInt(annof)+2000);
   const url = 'http://localhost:8080/scuola/download';
   let body = {name:"scuole.xlsx",anno:annot };
-  console.log(body.name);
-  // Effettua una richiesta HTTP GET per scaricare il file
- // Effettua una richiesta HTTP POST per scaricare il file
+  
+
  return this.http.post<Blob>(url, body, {
   responseType: 'blob' as 'json', // Indica al server che ci aspettiamo un blob come risposta
 });

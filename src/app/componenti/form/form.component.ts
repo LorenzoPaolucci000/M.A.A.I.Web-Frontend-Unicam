@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
     styleUrls: ['./form.component.css'],
   })
 export class FormdatComponent implements OnInit{
-  //showAdminForm: boolean = false;
+
   items: string[]=[];
   item:string='';
   private nome: string = '';
@@ -25,10 +25,7 @@ export class FormdatComponent implements OnInit{
    scuole: string[]=[];
    private scuola: string='';
  constructor(private route: ActivatedRoute,private http : HttpClient) {
-  /* this.route.url.subscribe(urlSegments => {
-      this.showAdminForm = urlSegments.some(segment => segment.path === 'admin');
-    });
-  */
+
   }
 
   ngOnInit(): void {
@@ -71,13 +68,7 @@ export class FormdatComponent implements OnInit{
 
   const anno=parseInt(nomeAttivitaAnno.substring(nomeAttivitaAnno.indexOf("2")));
   const scuola=this.scuola;
-  console.log(nomeAttivitaAnno)
-  console.log(nome);
-  console.log(cognome);
-  console.log(email);
-  console.log(nomeAttivita);
-  console.log(anno);
-  console.log(scuola);
+
     let body = {nome,cognome,email,nomeAttivita,anno,scuola};
     
 if(nomeAttivita!=""&&nome!=""&&cognome!=""&&email!=""&&scuola!=""){
@@ -138,7 +129,7 @@ this.visualizza=event.target.value;
       let array=this.getScuole();
       array.subscribe(
         (result: string[]) => {
-          // Qui puoi utilizzare i valori emessi dall'Observable come un array di stringhe
+          
           this.scuole=result; // Stampa i valori su console
         }
       );

@@ -58,8 +58,7 @@ private visualizzaAtt:string='';
   
     if (this.validateYears()) {
       // Puoi eseguire qui le operazioni che desideri con i valori degli anni accademici
-      console.log('Anno accademico di inizio:', this.annoAccademicoInizio);
-      console.log('Anno accademico di fine:', this.annoAccademicoFine);
+ 
       
       this.onClick()
 
@@ -116,10 +115,7 @@ private visualizzaAtt:string='';
     const profUnicam=this.selectedProf;
     const profReferente=this.prof;
 
-   console.log(profReferente);
-   console.log(profUnicam);
-    console.log(scuola);
-    console.log(anno);
+   
     let body = {nome,tipo,scuola,anno,sedeA,dataInizio,dataFine,descrizione,profUnicam,profReferente};
     this.http
       .post<string>('http://localhost:8080/professori/createEmptyActivity1',body)
@@ -148,14 +144,13 @@ private visualizzaAtt:string='';
     
   }
 
-   //items: string[] = ['Opzione 1', 'Opzione 2', 'Opzione 3']; // Lista di stringhe
    showDropdown: boolean = false;
 
    toggleDropdown() {
      let array=this.getPendingActivities();
      array.subscribe(
        (result: string[]) => {
-         // Qui puoi utilizzare i valori emessi dall'Observable come un array di stringhe
+         
          this.items=result; // Stampa i valori su console
        }
      );
@@ -170,7 +165,7 @@ private visualizzaAtt:string='';
     let array=this.getScuole();
     array.subscribe(
       (result: string[]) => {
-        // Qui puoi utilizzare i valori emessi dall'Observable come un array di stringhe
+       
         this.scuole=result; // Stampa i valori su console
       }
     );
@@ -181,7 +176,7 @@ private visualizzaAtt:string='';
     let array=this.getReferenti();
     array.subscribe(
       (result: string[]) => {
-        // Qui puoi utilizzare i valori emessi dall'Observable come un array di stringhe
+      
         this.professori=result; // Stampa i valori su console
       }
     );
@@ -192,7 +187,7 @@ private visualizzaAtt:string='';
     let array=this.getProfUnicam();
     array.subscribe(
       (result: string[]) => {
-        // Qui puoi utilizzare i valori emessi dall'Observable come un array di stringhe
+      
         this.professoriUnicam=result; // Stampa i valori su console
       }
     );
