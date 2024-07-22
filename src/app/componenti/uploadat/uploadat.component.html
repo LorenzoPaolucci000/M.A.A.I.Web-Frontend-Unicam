@@ -96,7 +96,7 @@
           <div>
             <label for="prof">Professore Unicam</label>
             <button (click)="toggleDropdownU()" class="btn">Cerca Professore Unicam!</button>
-            <div class="container" *ngIf="showDropdownU">
+            <div class="containerp" *ngIf="showDropdownU">
               <h3>Professori Unicam Presenti</h3>
               <label for="profDropdown"></label>
               <select id="profDropdown" [(ngModel)]="selectedProf" multiple>

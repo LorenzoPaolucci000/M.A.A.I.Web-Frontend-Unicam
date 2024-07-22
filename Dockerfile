@@ -1,22 +1,29 @@
-# Stage 1: Build Angular app
-FROM node:20 as build-angular
+# Usare una base image di node per il build
+FROM node:20 AS build
+
+# Imposta la directory di lavoro
 WORKDIR /app
-COPY angular-app/package.json angular-app/package-lock.json ./
+
+# Copia il file package.json e package-lock.json
+COPY package*.json ./
+
+# Installa le dipendenze
 RUN npm install
-COPY angular-app/ ./
+
+# Copia il resto del codice sorgente
+COPY . .
+
+# Costruisci l'applicazione Angular
 RUN npm run build --prod
 
-# Stage 2: Build Spring Boot app
-FROM maven:3.9.5-jdk-17 as build-spring
-WORKDIR /app
-COPY springboot-app/pom.xml .
-COPY springboot-app/src ./src
-COPY --from=build-angular /app/dist/ ./src/main/resources/static/
-RUN mvn clean package -DskipTests
+# Usare una base image di nginx per servire l'applicazione
+FROM nginx:alpine
 
-# Stage 3: Run the application
-FROM openjdk:17-jre-slim
-WORKDIR /app
-COPY --from=build-spring /app/target/springboot-app.jar ./app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Copia i file buildati nella directory di nginx
+COPY --from=build /app/dist/<PiattaformaPCTO> /usr/share/nginx/html
+
+# Esporre la porta 80
+EXPOSE 80
+
+# Avviare nginx
+CMD ["nginx", "-g", "daemon off;"]
