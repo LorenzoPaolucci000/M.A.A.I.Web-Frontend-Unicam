@@ -9,6 +9,7 @@ Questa piattaforma permette di eseguire due operazioni fondamentali per la gesti
 - _Upload_ : caricare i foglio di lavoro Execl dove sono salvati i nomi degli studenti che hanno partecipato ad una attività la lista di quellli che si sono iscritti all'università
 
 - _Visualizzazione_ : visualizzare i dati raccolti secodno due viste , vista scuole e vista attività, e attraverso una mappa in cui sono evidenziate le regioni italiane da cui provengono gli iscritti
+- _Iscrizione-: sezione in cui è possibile caricare attività vuote(a cui è possibile iscriversi), iscriversi alle attività , impossibilitare l'iscrizione alle attività.
 
 Ora analizzeremo questi funzionamenti nel dettaglio.
 
@@ -21,7 +22,7 @@ Quando si caricano i file delle immatricolazioni il server provvederà a confron
 
 ### Visualizzazzione
 
-Per la visualizzazione ci sono due sezioni, la prima permette di visualizzare le statistiche in base a due viste, vista scuole e vista attività, la seconda invece attraverso una mappa delle regioni italiane.<br>
+Per la visualizzazione ci sono due sezioni, la prima permette di visualizzare le statistiche in base a quattro viste, vista scuole e vista attività, vista professori Scuole e vista professori Unicam, la seconda invece attraverso una mappa delle regioni italiane.<br>
 
 ####
 
@@ -40,8 +41,17 @@ La vista attivtà funziona analogamente alla vista scuole solo che i dati sono d
 Di base viene visualizzata una lista con tutti le attività che hanno portato iscritti nell'anno accademico corrente. Queste attività sono, come per l'altra vista, ordinate in maniera decrescente in base al numero di iscritti.<br>
 Anche qui è possibile selezionare l'anno accademico di cui vedere i risultati e l'ordinamento che però stavolta sarà solo numerico in base agli iscritti o alfabetico in base al nome dell'attività.
 Anche qui cliccando su un attività uscira il dettaglio con la lista degli studenti che si sono iscritti
+###
+
+Vista professori Scuole permette di visualizzare tutti i professori degli istituti superiori che sono stati referenti delle attività
+
+
+###
+
+Vista professori Unicam permette di visualizzare tutti i professori Unicam   che sono stati referenti delle attività
 
 ### Mappa
+
 
 La mappa è una terza vista in cui vengono visualizzati i dati delle iscrizioni divisi per regione di provenienza. Le regioni sono colorate in modo diverso per indicare il numero di iscritti provenienti da quella regione:
 
@@ -49,8 +59,10 @@ La mappa è una terza vista in cui vengono visualizzati i dati delle iscrizioni 
 - _Blue_ : iscritti >= 1 e iscritti <=9
 - _Viola_ : iscritti >= 10 e iscritti <=99
 - _Verde_ : iscritti > 100
-
 Cliccando su una di esse si aprira il dettaglio che mostra il numero di iscritti ma diviso per le scuole di quella data regione.
+
+
+
 
 ###
 
