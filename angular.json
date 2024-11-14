@@ -104,5 +104,8 @@
       }
     }
   },
-  "defaultProject": "prova-few"
+  "defaultProject": "prova-few",
+  "cli": {
+    "analytics": false
+  }
 }
